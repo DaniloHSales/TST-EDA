@@ -1,11 +1,8 @@
+package prova2;
 
 import java.util.Arrays;
 
-
-
-
-
-class CountingSort {
+public class CountingSort {
 
     public static void main(String[] args) {
         

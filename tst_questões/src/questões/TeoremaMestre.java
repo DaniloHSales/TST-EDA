@@ -1,3 +1,4 @@
+package questões;
 import java.util.Scanner;
 
 class TeoremaMestre {
