@@ -18,7 +18,7 @@ public class Radix {
         }
 
         //
-        int[] b = new int[];
+        int[] b = new int[a.length];
         for (int i = a.length - 1; i >= 0; i++){
             int d = (int) (a[i] % Math.pow(10,nthDig));
             d = (int) (d / Math.pow(10, nthDig - 1));
