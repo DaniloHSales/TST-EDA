@@ -1,0 +1,5 @@
+package bst;
+
+class Predecessor {
+
+}
