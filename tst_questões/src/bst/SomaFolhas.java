@@ -3,82 +3,75 @@ package bst;
 import java.util.*;
 
 public class SomaFolhas {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         String[] elementos = sc.nextLine().split(" ");
 
-        BST bst = new BST();
-        for (int i = 0; i < elementos.length; i++){
-            bst.add(Integer.parseInt(elementos[i]));
+        BSTeta teta = new BSTeta();
+        for (String num : elementos) {
+            teta.add(Integer.parseInt(num));
         }
-        System.out.println(bst.somaFolhas());
+
+        System.out.println(teta.contaFolhas());
     }
 }
 
-class BST{
-    private Node root;
-    private int size;
+class BSTeta {
 
-    public boolean isEmpty(){
+    Node root;
+
+    public boolean isEmpty() {
         return this.root == null;
     }
 
-    public Node getRoot() { // Método para acessar a raiz
-        return this.root;
-    }
-
-    public void add(int element){
-        if (isEmpty()) this.root = new Node(element);
-        else {
+    public void add(int element) {
+        if (isEmpty()) {
+            this.root = new Node(element); 
+        }else {
             Node aux = this.root;
-            while(aux != null)
-                if (element < aux.value){
-                    if (aux.left == null){
-                        Node node = new Node(element);
-                        aux.left = node;
-                        node.parent = aux;
+            while (aux != null) {
+                if (element < aux.value) {
+                    if (aux.left == null) {
+                        aux.left = new Node(element);
                         return;
                     }
                     aux = aux.left;
-                }else{
-                    if(aux.right == null){
-                        Node node = new Node(element);
-                        aux.left = node;
-                        node.parent = aux;
+                } else {
+                    if (aux.right == null) {
+                        aux.right = new Node(element);
                         return;
                     }
                     aux = aux.right;
                 }
             }
+
         }
+    }
+
+    public int  contaFolhas(){
+        return contaFolhas(this.root);
+    }
+
+    private int contaFolhas(Node node){
+       if (node == null) return 0;
+
+       while (node.left == null && node.right == null){
+            return node.value;
+       } 
+
+       return contaFolhas(node.left) + contaFolhas(node.right);
+    }
     
-
-        public int somaFolhas(){
-            return somaFolhas(this.root);
-        }
-
-        private int somaFolhas(Node node) {
-            if (this.root == null) return 0;
-            else if (node.left == null && node.right == null) return node.value;
-            // soma folhas dos filhos esquerdo e direito
-            return somaFolhas(node.left) + somaFolhas(node.right);
-        }
 }
 
-class Node{
-
+class Node {
     Node left;
     Node right;
     Node parent;
-
     int value;
 
-    public Node(int value){
-        this.value= value;
+    public Node(int value) {
+        this.value = value;
     }
-}    
-
-
-
-
+}

@@ -1,7 +1,6 @@
 package bst;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 class Predecessor_bst {
     public static void main(String[] args){
@@ -17,32 +16,53 @@ class Predecessor_bst {
 }
 
 class BST{
-    public Node root;
-    private int size;
+    Node root;
 
-    public boolean isEmpty(){return this.root == null;}
+    public boolean isEmpty(){
+        return this.root == null;
+    }
 
-    public void add(int element){
-        this.size += 1;
-        if(isEmpty())
+    public String bfs() {
+        if (isEmpty()) return "";
+
+        StringBuilder resultado = new StringBuilder();
+        Queue<Node> fila = new LinkedList<>();
+        fila.add(this.root);
+
+        while (!fila.isEmpty()) {
+            int tamanhoNivel = fila.size(); // controla os nós que serão removidos em cada nivel
+            List<Integer> nivel = new ArrayList<>(); // é criada somente para o nível atual
+
+            for (int i = 0; i < tamanhoNivel; i++){
+                Node current = fila.poll();
+                nivel.add(current.value);
+
+                if (current.right != null) fila.add(current.right);
+                if (current.left != null) fila.add(current.left);
+            }
+
+            for (int num : nivel){ // add o nivel da lista ao resultado e depois a lista(nivel é descartada)
+                resultado.append(num).append(" ");
+            }
+        }
+        return resultado.toString().trim();
+    }
+
+    public void add(int element) {
+        if (isEmpty()) {
             this.root = new Node(element);
-        else{
+        } else {
             Node aux = this.root;
-            while(aux != null){
-                if(element < aux.value){
-                    if(aux.left == null){
-                        Node newNode = new Node(element);
-                        aux.left = newNode;
-                        newNode.parent = aux;
+            while (aux != null) {
+                if (element < aux.value) {
+                    if (aux.left == null) {
+                        aux.left = new Node(element);
                         return;
                     }
                     aux = aux.left;
-                }
-                else{
-                    if(aux.right == null){
-                        Node newNode = new Node(element);
-                        aux.right = newNode;
-                        newNode.parent = aux;
+                } else {
+                    if (aux.right == null) {
+                        aux.right = new Node(element);
                         return;
                     }
                     aux = aux.right;
@@ -93,6 +113,17 @@ class BST{
             if(element > aux.value) aux = aux.right;
         }
         return null;
+    }
+    
+    public int contaNos() {
+        return contaNos(this.root);
+    }
+
+    private int contaNos(Node node) {
+        if (node == null || (node.left == null && node.right == null)) {
+            return 0; // Nó nulo ou folha, não conta
+        }
+        return 1 + contaNos(node.left) + contaNos(node.right);
     }
 }
 
