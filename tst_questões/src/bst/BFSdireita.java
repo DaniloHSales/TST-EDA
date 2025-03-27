@@ -8,7 +8,7 @@ class BFSdireita {
         String[] entrada = sc.nextLine().split(" ");
         sc.close();
 
-        BST Bst = new BST();
+        BST3 Bst = new BST3();
         for (String num : entrada) {
             Bst.add(Integer.parseInt(num));
         }
@@ -16,7 +16,7 @@ class BFSdireita {
     }
 }
 
-class BST {
+class BST3 {
     Node root;
 
     public boolean isEmpty() {

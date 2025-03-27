@@ -8,7 +8,7 @@ public class ContaNOSinternos {
         String[] entrada = sc.nextLine().split(" ");
         sc.close();
 
-        BST bst = new BST();
+        BST1 bst = new BST1();
         for (String num : entrada) {
             bst.add(Integer.parseInt(num));
         }
@@ -17,7 +17,7 @@ public class ContaNOSinternos {
     }
 }
 
-class BST {
+class BST1 {
     Node root;
 
     public boolean isEmpty() {

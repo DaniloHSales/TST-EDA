@@ -8,7 +8,7 @@ public class SomaFolhas {
         Scanner sc = new Scanner(System.in);
         String[] elementos = sc.nextLine().split(" ");
 
-        BSTeta teta = new BSTeta();
+        BST4 teta = new BST4();
         for (String num : elementos) {
             teta.add(Integer.parseInt(num));
         }
@@ -17,7 +17,7 @@ public class SomaFolhas {
     }
 }
 
-class BSTeta {
+class BST4 {
 
     Node root;
 
@@ -49,18 +49,18 @@ class BSTeta {
         }
     }
 
-    public int  contaFolhas(){
-        return contaFolhas(this.root);
+    public int  somaFolhas(){
+        return somaFolhas(this.root);
     }
 
-    private int contaFolhas(Node node){
+    private int somaFolhas(Node node){
        if (node == null) return 0;
 
        while (node.left == null && node.right == null){
             return node.value;
        } 
 
-       return contaFolhas(node.left) + contaFolhas(node.right);
+       return somaFolhas(node.left) + somaFolhas(node.right);
     }
     
 }
